@@ -200,6 +200,86 @@
             html { scroll-behavior: auto; }
             *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
         }
+
+        /* =========================================================
+           GHALAA PREMIUM BUTTON SYSTEM
+           Unified luxury controls matching the dark + gold identity
+           ========================================================= */
+        button.site-btn {
+            position: relative;
+            isolation: isolate;
+            border-radius: 0.9rem;
+            border: 1px solid rgba(217, 119, 6, 0.34);
+            box-shadow: 0 8px 22px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.06);
+            transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, filter .22s ease, background-color .22s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        button.site-btn::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,.13) 50%, transparent 80%);
+            transform: translateX(-130%);
+            transition: transform .55s ease;
+            pointer-events: none;
+            z-index: -1;
+        }
+        button.site-btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(245, 158, 11, 0.72);
+            box-shadow: 0 12px 28px rgba(0,0,0,.32), 0 0 18px rgba(217,119,6,.16), inset 0 1px 0 rgba(255,255,255,.09);
+            filter: brightness(1.06);
+        }
+        button.site-btn:hover::before {
+            transform: translateX(130%);
+        }
+        button.site-btn:active {
+            transform: translateY(0) scale(.97);
+            box-shadow: 0 5px 14px rgba(0,0,0,.28);
+        }
+        button.site-btn:focus-visible {
+            outline: 3px solid rgba(245,158,11,.42);
+            outline-offset: 3px;
+        }
+        button.site-btn i {
+            transition: transform .22s ease, filter .22s ease;
+        }
+        button.site-btn:hover i {
+            transform: scale(1.08);
+            filter: drop-shadow(0 0 5px rgba(245,158,11,.35));
+        }
+
+        /* Compact +/- cart controls */
+        button.site-btn-qty {
+            min-width: 2rem;
+            min-height: 2rem;
+            border: 1px solid rgba(217,119,6,.28);
+            border-radius: .65rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.05);
+            transition: transform .18s ease, background-color .18s ease, border-color .18s ease, box-shadow .18s ease;
+        }
+        button.site-btn-qty:hover {
+            transform: translateY(-1px) scale(1.06);
+            background-color: rgba(245,158,11,.28);
+            border-color: rgba(245,158,11,.58);
+            box-shadow: 0 6px 15px rgba(0,0,0,.28), 0 0 10px rgba(217,119,6,.12);
+        }
+        button.site-btn-qty:active {
+            transform: scale(.92);
+        }
+
+        /* Make icon-only controls feel intentional on mobile */
+        @media (max-width: 1023px) {
+            button.site-btn {
+                min-height: 42px;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            button.site-btn, button.site-btn::before, button.site-btn i, button.site-btn-qty {
+                transition: none !important;
+            }
+        }
     </style>
 
     <meta name="mobile-web-app-capable" content="yes">
@@ -232,7 +312,7 @@
 
                     <!-- Services Dropdown -->
                     <div class="relative ltr:ml-2 rtl:mr-2">
-                        <button type="button" id="services-dropdown-btn" aria-haspopup="true" aria-expanded="false" class="px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold hover:bg-amber-500/20 transition flex items-center gap-1.5">
+                        <button type="button" id="services-dropdown-btn" aria-haspopup="true" aria-expanded="false" class="px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold hover:bg-amber-500/20 transition flex items-center gap-1.5 site-btn">
                             <i class="fa-solid fa-list-check text-amber-400"></i>
                             <span data-i18n="services_guide">دليل الخدمات</span>
                             <i class="fa-solid fa-chevron-down text-[10px]"></i>
@@ -290,11 +370,11 @@
 
                 <!-- Shopping Cart Icon & Language Switcher -->
                 <div class="hidden lg:flex items-center gap-3">
-                    <button id="cart-toggle-btn" class="relative p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:bg-amber-500/20 transition flex items-center justify-center">
+                    <button id="cart-toggle-btn" class="relative p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:bg-amber-500/20 transition flex items-center justify-center site-btn">
                         <i class="fa-solid fa-cart-shopping text-base"></i>
                         <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-amber-500 text-black text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center border border-black">0</span>
                     </button>
-                    <button id="lang-toggle-btn" class="px-3 py-1.5 rounded-xl border border-amber-500/40 text-amber-300 hover:bg-amber-500/20 transition text-xs font-bold flex items-center gap-1.5">
+                    <button id="lang-toggle-btn" class="px-3 py-1.5 rounded-xl border border-amber-500/40 text-amber-300 hover:bg-amber-500/20 transition text-xs font-bold flex items-center gap-1.5 site-btn">
                         <i class="fa-solid fa-globe"></i>
                         <span id="lang-label">English</span>
                     </button>
@@ -305,15 +385,15 @@
 
                 <!-- Mobile Navigation Controls -->
                 <div class="lg:hidden flex items-center gap-2">
-                    <button id="cart-toggle-btn-mobile" class="relative p-2 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 text-sm">
+                    <button id="cart-toggle-btn-mobile" class="relative p-2 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 text-sm site-btn">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <span id="cart-badge-mobile" class="absolute -top-1 -right-1 bg-amber-500 text-black text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
                     </button>
-                    <button id="lang-toggle-btn-mobile" class="px-2.5 py-1.5 rounded-lg border border-amber-500/40 text-amber-300 text-xs font-bold flex items-center gap-1">
+                    <button id="lang-toggle-btn-mobile" class="px-2.5 py-1.5 rounded-lg border border-amber-500/40 text-amber-300 text-xs font-bold flex items-center gap-1 site-btn">
                         <i class="fa-solid fa-globe"></i>
                         <span id="lang-label-mobile">English</span>
                     </button>
-                    <button type="button" id="menu-btn" aria-label="فتح القائمة" aria-expanded="false" aria-controls="mobile-menu" class="p-2 text-amber-400 focus:outline-none text-xl hover:text-amber-300 transition">
+                    <button type="button" id="menu-btn" aria-label="فتح القائمة" aria-expanded="false" aria-controls="mobile-menu" class="p-2 text-amber-400 focus:outline-none text-xl hover:text-amber-300 transition site-btn">
                         <i class="fa-solid fa-bars"></i>
                     </button>
                 </div>
@@ -463,7 +543,7 @@
                     </div>
                     <div class="p-6 pt-0 flex items-center justify-between border-t border-amber-900/30 mt-auto">
                         <span data-i18n="card_c1_price" class="text-amber-300 font-bold text-sm">50 د.أ</span>
-                        <button onclick="addToCart('تنظيف عميق للشقق والفلل', 50)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5">
+                        <button onclick="addToCart('تنظيف عميق للشقق والفلل', 50)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5 site-btn">
                             <i class="fa-solid fa-cart-plus text-sm"></i> <span>إضافة للسلة</span>
                         </button>
                     </div>
@@ -487,7 +567,7 @@
                     </div>
                     <div class="p-6 pt-0 flex items-center justify-between border-t border-amber-900/30 mt-auto">
                         <span data-i18n="card_c2_price" class="text-amber-300 font-bold text-sm">25 د.أ</span>
-                        <button onclick="addToCart('غسيل الكنب والمجالس بالبخار', 25)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5">
+                        <button onclick="addToCart('غسيل الكنب والمجالس بالبخار', 25)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5 site-btn">
                             <i class="fa-solid fa-cart-plus text-sm"></i> <span>إضافة للسلة</span>
                         </button>
                     </div>
@@ -511,7 +591,7 @@
                     </div>
                     <div class="p-6 pt-0 flex items-center justify-between border-t border-amber-900/30 mt-auto">
                         <span data-i18n="card_c3_price" class="text-amber-300 font-bold text-sm">30 د.أ</span>
-                        <button onclick="addToCart('تنظيف وتعقيم الخزانات', 30)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5">
+                        <button onclick="addToCart('تنظيف وتعقيم الخزانات', 30)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5 site-btn">
                             <i class="fa-solid fa-cart-plus text-sm"></i> <span>إضافة للسلة</span>
                         </button>
                     </div>
@@ -535,7 +615,7 @@
                     </div>
                     <div class="p-6 pt-0 flex items-center justify-between border-t border-amber-900/30 mt-auto">
                         <span data-i18n="card_c4_price" class="text-amber-300 font-bold text-sm">15 د.أ</span>
-                        <button onclick="addToCart('غسيل وتنقيه المكيفات', 15)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5">
+                        <button onclick="addToCart('غسيل وتنقيه المكيفات', 15)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5 site-btn">
                             <i class="fa-solid fa-cart-plus text-sm"></i> <span>إضافة للسلة</span>
                         </button>
                     </div>
@@ -559,7 +639,7 @@
                     </div>
                     <div class="p-6 pt-0 flex items-center justify-between border-t border-amber-900/30 mt-auto">
                         <span data-i18n="card_c5_price" class="text-amber-300 font-bold text-sm">40 د.أ</span>
-                        <button onclick="addToCart('تنظيف الواجهات الزجاجية', 40)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5">
+                        <button onclick="addToCart('تنظيف الواجهات الزجاجية', 40)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5 site-btn">
                             <i class="fa-solid fa-cart-plus text-sm"></i> <span>إضافة للسلة</span>
                         </button>
                     </div>
@@ -583,7 +663,7 @@
                     </div>
                     <div class="p-6 pt-0 flex items-center justify-between border-t border-amber-900/30 mt-auto">
                         <span data-i18n="card_c6_price" class="text-amber-300 font-bold text-sm">60 د.أ</span>
-                        <button onclick="addToCart('جلي وتلميع الرخام والبلاط', 60)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5">
+                        <button onclick="addToCart('جلي وتلميع الرخام والبلاط', 60)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5 site-btn">
                             <i class="fa-solid fa-cart-plus text-sm"></i> <span>إضافة للسلة</span>
                         </button>
                     </div>
@@ -621,7 +701,7 @@
                     </div>
                     <div class="p-6 pt-0 flex items-center justify-between border-t border-amber-900/30 mt-auto">
                         <span data-i18n="card_m1_price" class="text-amber-300 font-bold text-sm">20 د.أ</span>
-                        <button onclick="addToCart('السباكة والصيانة الصحية', 20)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5">
+                        <button onclick="addToCart('السباكة والصيانة الصحية', 20)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5 site-btn">
                             <i class="fa-solid fa-cart-plus text-sm"></i> <span>إضافة للسلة</span>
                         </button>
                     </div>
@@ -645,7 +725,7 @@
                     </div>
                     <div class="p-6 pt-0 flex items-center justify-between border-t border-amber-900/30 mt-auto">
                         <span data-i18n="card_m2_price" class="text-amber-300 font-bold text-sm">20 د.أ</span>
-                        <button onclick="addToCart('الأعمال الكهربائية والإضاءة', 20)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5">
+                        <button onclick="addToCart('الأعمال الكهربائية والإضاءة', 20)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5 site-btn">
                             <i class="fa-solid fa-cart-plus text-sm"></i> <span>إضافة للسلة</span>
                         </button>
                     </div>
@@ -669,7 +749,7 @@
                     </div>
                     <div class="p-6 pt-0 flex items-center justify-between border-t border-amber-900/30 mt-auto">
                         <span data-i18n="card_m3_price" class="text-amber-300 font-bold text-sm">35 د.أ</span>
-                        <button onclick="addToCart('صيانة وتعبئة فريون المكيفات', 35)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5">
+                        <button onclick="addToCart('صيانة وتعبئة فريون المكيفات', 35)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5 site-btn">
                             <i class="fa-solid fa-cart-plus text-sm"></i> <span>إضافة للسلة</span>
                         </button>
                     </div>
@@ -693,7 +773,7 @@
                     </div>
                     <div class="p-6 pt-0 flex items-center justify-between border-t border-amber-900/30 mt-auto">
                         <span data-i18n="card_m4_price" class="text-amber-300 font-bold text-sm">50 د.أ</span>
-                        <button onclick="addToCart('الدهانات والديكورات الحديثة', 50)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5">
+                        <button onclick="addToCart('الدهانات والديكورات الحديثة', 50)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5 site-btn">
                             <i class="fa-solid fa-cart-plus text-sm"></i> <span>إضافة للسلة</span>
                         </button>
                     </div>
@@ -717,7 +797,7 @@
                     </div>
                     <div class="p-6 pt-0 flex items-center justify-between border-t border-amber-900/30 mt-auto">
                         <span data-i18n="card_m5_price" class="text-amber-300 font-bold text-sm">25 د.أ</span>
-                        <button onclick="addToCart('صيانة الأجهزة المنزلية', 25)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5">
+                        <button onclick="addToCart('صيانة الأجهزة المنزلية', 25)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5 site-btn">
                             <i class="fa-solid fa-cart-plus text-sm"></i> <span>إضافة للسلة</span>
                         </button>
                     </div>
@@ -741,7 +821,7 @@
                     </div>
                     <div class="p-6 pt-0 flex items-center justify-between border-t border-amber-900/30 mt-auto">
                         <span data-i18n="card_m6_price" class="text-amber-300 font-bold text-sm">70 د.أ</span>
-                        <button onclick="addToCart('عزل الأسطح والخزانات', 70)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5">
+                        <button onclick="addToCart('عزل الأسطح والخزانات', 70)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 transition text-xs font-bold shadow-md flex items-center gap-1.5 site-btn">
                             <i class="fa-solid fa-cart-plus text-sm"></i> <span>إضافة للسلة</span>
                         </button>
                     </div>
@@ -767,7 +847,7 @@
                             <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
                                 <i class="fa-solid fa-cart-shopping"></i> الخدمات المختارة
                             </h3>
-                            <button onclick="clearCart()" class="text-xs text-red-400 hover:underline">تفريغ السلة</button>
+                            <button onclick="clearCart()" class="text-xs text-red-400 hover:underline site-btn">تفريغ السلة</button>
                         </div>
                         
                         <!-- Cart Items List Container -->
@@ -826,7 +906,7 @@
                         <div>
                             <label class="block text-xs font-bold text-slate-300 mb-1.5">تحديد الموقع الجغرافي (GPS)</label>
                             <div class="flex gap-2">
-                                <button type="button" id="get-location-btn" onclick="getGPSLocation()" class="px-4 py-3 bg-amber-500/20 border border-amber-500/40 hover:bg-amber-500/30 text-amber-300 rounded-xl text-xs font-bold flex items-center gap-2 transition flex-shrink-0">
+                                <button type="button" id="get-location-btn" onclick="getGPSLocation()" class="px-4 py-3 bg-amber-500/20 border border-amber-500/40 hover:bg-amber-500/30 text-amber-300 rounded-xl text-xs font-bold flex items-center gap-2 transition flex-shrink-0 site-btn">
                                     <i class="fa-solid fa-location-crosshairs text-base"></i> <span>تحديد موقعي الآن</span>
                                 </button>
                                 <input type="text" id="b-location-url" readonly class="w-full px-4 py-3 rounded-xl border border-amber-900/50 bg-[#121110]/50 text-slate-400 text-xs overflow-hidden" placeholder="رابط موقعك عبر الخريطة يظهر هنا تلقائياً...">
@@ -838,7 +918,7 @@
                             <textarea id="b-details" rows="2" class="w-full px-4 py-3 rounded-xl border border-amber-900/50 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-[#121110] text-white text-sm" placeholder="اكتب رقم الشقة، المبنى أو أي تفاصيل أُخرى..."></textarea>
                         </div>
 
-                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold hover:from-green-500 hover:to-emerald-500 transition shadow-xl shadow-green-950/50 flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] text-sm sm:text-base">
+                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold hover:from-green-500 hover:to-emerald-500 transition shadow-xl shadow-green-950/50 flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] text-sm sm:text-base site-btn">
                             <i class="fa-brands fa-whatsapp text-2xl"></i> <span>إرسال الطلب وإجمالي السلة إلى الواتساب (0788266392)</span>
                         </button>
                     </form>
@@ -890,7 +970,7 @@
                         <textarea id="g-message" rows="4" required class="w-full px-4 py-3 rounded-xl border border-amber-900/50 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-[#121110] text-white text-sm" placeholder="اكتب التفاصيل وشروط الشراكة المبدئية هنا..."></textarea>
                     </div>
 
-                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-slate-950 font-extrabold hover:brightness-110 transition shadow-xl gold-glow flex items-center justify-center gap-2 text-sm sm:text-base">
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-slate-950 font-extrabold hover:brightness-110 transition shadow-xl gold-glow flex items-center justify-center gap-2 text-sm sm:text-base site-btn">
                         <i class="fa-solid fa-paper-plane text-lg"></i> <span data-i18n="btn_send_corporate">إرسال الرسالة رسمياً عبر البريد (corporate@ghalaa.com)</span>
                     </button>
                 </form>
@@ -968,7 +1048,7 @@
                         <textarea id="cv-notes" rows="3" class="w-full px-4 py-3 rounded-xl border border-amber-900/50 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-[#121110] text-white text-sm" placeholder="اكتب ملخصاً سريعا عن مهاراتك وأماكن عملك السابقة..."></textarea>
                     </div>
 
-                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 text-white font-extrabold hover:from-emerald-500 hover:to-green-500 transition shadow-xl flex items-center justify-center gap-2 text-sm sm:text-base">
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 text-white font-extrabold hover:from-emerald-500 hover:to-green-500 transition shadow-xl flex items-center justify-center gap-2 text-sm sm:text-base site-btn">
                         <i class="fa-solid fa-file-arrow-up text-lg"></i> <span data-i18n="btn_send_cv">إرسال طلب التوظيف والـ CV للشركة</span>
                     </button>
                 </form>
@@ -1059,7 +1139,7 @@
     </div>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top" aria-label="Back to top" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-amber-600/80 hover:bg-amber-500 text-white rounded-full hidden items-center justify-center text-lg backdrop-blur-md border border-amber-400/40 shadow-xl transition hover:scale-110">
+    <button id="back-to-top" aria-label="Back to top" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-amber-600/80 hover:bg-amber-500 text-white rounded-full hidden items-center justify-center text-lg backdrop-blur-md border border-amber-400/40 shadow-xl transition hover:scale-110 site-btn">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
@@ -1187,9 +1267,9 @@
                                 <span class="text-amber-400 font-semibold">${item.price} د.أ / للوحدة</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <button onclick="changeQty('${item.title}', -1)" class="w-6 h-6 rounded bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold hover:bg-amber-500/40">-</button>
+                                <button onclick="changeQty('${item.title}', -1)" class="w-6 h-6 rounded bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold hover:bg-amber-500/40 site-btn-qty">-</button>
                                 <span class="text-white font-bold">${item.quantity}</span>
-                                <button onclick="changeQty('${item.title}', 1)" class="w-6 h-6 rounded bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold hover:bg-amber-500/40">+</button>
+                                <button onclick="changeQty('${item.title}', 1)" class="w-6 h-6 rounded bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold hover:bg-amber-500/40 site-btn-qty">+</button>
                                 <span class="text-amber-300 font-bold ltr:ml-2 rtl:mr-2">${itemTotal} د.أ</span>
                             </div>
                         </div>
